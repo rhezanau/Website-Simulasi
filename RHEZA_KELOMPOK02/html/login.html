@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+  <div class="login-box">
+    <h2>Form <span>Login</span></h2>
+    <form action="../html/loading.html" method="POST">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" required>
+
+      <label>Role:</label>
+      <div class="roles">
+        <label><input type="radio" name="role" value="admin" required> <span>Admin</span></label>
+        <label><input type="radio" name="role" value="guru"> Guru</label>
+        <label><input type="radio" name="role" value="siswa"> Siswa</label>
+      </div>
+
+      <button type="submit">LOGIN</button>
+    </form>
+  </div>
+</body>
+</html>
+<script src="../js/login.js"></script>
+

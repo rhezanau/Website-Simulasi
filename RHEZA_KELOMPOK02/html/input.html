@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Input Nilai (Guru)</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+    }
+
+    .nilai-box {
+      border: 2px solid #ccc;
+      padding: 20px;
+      display: inline-block;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px dashed #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      font-family: monospace;
+      text-align: center;
+    }
+
+    .highlight {
+      color: orange;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 5px 15px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>10. Input Nilai (Guru)</h2>
+  <div class="nilai-box">
+    <div><strong>| INPUT NILAI |</strong></div>
+    <hr>
+    <div>
+      Pilih Kelas:
+      <select id="kelas-select">
+        <option value="XI PPLG 1">XI PPLG 1</option>
+        <option value="XI DKV 2">XI DKV 2</option>
+      </select>
+    </div>
+    <div>
+      Pilih Mapel:
+      <select id="mapel-select">
+        <option value="Pemrograman Dasar">Pemrograman Dasar</option>
+        <option value="Desain Grafis">Desain Grafis</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nama Siswa</th>
+          <th>Tugas</th>
+          <th>UTS</th>
+          <th>UAS</th>
+        </tr>
+      </thead>
+      <tbody id="nilai-body">
+        <!-- Data input nilai akan muncul di sini -->
+      </tbody>
+    </table>
+
+    <button onclick="simpanNilai()">[SIMPAN]</button>
+  </div>
+
+  <script>
+    const siswaPerKelas = {
+      "XI PPLG 1": ["Ahmad Fikri", "Siti Nurhaliza"],
+      "XI DKV 2": ["Budi Santoso", "Dina Mariani"]
+    };
+
+    function tampilkanInputNilai() {
+      const kelas = document.getElementById("kelas-select").value;
+      const siswaList = siswaPerKelas[kelas] || [];
+
+      const tbody = document.getElementById("nilai-body");
+      tbody.innerHTML = "";
+
+      siswaList.forEach(nama => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${nama}</td>
+          <td><input type="number" name="tugas-${nama}" value="0" /></td>
+          <td><input type="number" name="uts-${nama}" value="0" /></td>
+          <td><input type="number" name="uas-${nama}" value="0" /></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function simpanNilai() {
+      const kelas = document.getElementById("kelas-select").value;
+      const siswaList = siswaPerKelas[kelas] || [];
+      const nilaiSiswa = [];
+
+      siswaList.forEach(nama => {
+        const tugas = document.querySelector(`[name="tugas-${nama}"]`).value;
+        const uts = document.querySelector(`[name="uts-${nama}"]`).value;
+        const uas = document.querySelector(`[name="uas-${nama}"]`).value;
+        nilaiSiswa.push({ nama, tugas, uts, uas });
+      });
+
+      console.log("Nilai disimpan untuk kelas:", kelas);
+      console.table(nilaiSiswa);
+      alert("Nilai berhasil disimpan (cek console).");
+    }
+
+    document.getElementById("kelas-select").addEventListener("change", tampilkanInputNilai);
+    document.getElementById("mapel-select").addEventListener("change", tampilkanInputNilai);
+
+    // Tampilkan pertama kali
+    window.onload = tampilkanInputNilai;
+  </script>
+
+</body>
+</html>

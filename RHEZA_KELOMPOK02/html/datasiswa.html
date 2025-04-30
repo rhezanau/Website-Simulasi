@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Siswa</title>
+  <style>
+    body { font-family: monospace; background: #f9f9f9; padding: 20px; }
+    table, th, td { border: 1px solid #000; border-collapse: collapse; }
+    th, td { padding: 6px 12px; }
+    select { font-family: monospace; margin-bottom: 10px; }
+    .highlight { color: orange; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>DATA SISWA (Admin/Guru)</h2>
+
+  <label for="filter">[<span style="color: purple;">Filter</span> Jurusan ▼]</label>
+  <select id="filter">
+    <option value="all">Semua Jurusan</option>
+    <option value="PPLG">PPLG</option>
+    <option value="DKV">DKV</option>
+    <option value="Akuntansi">Akuntansi</option>
+  </select>
+
+  <table>
+    <thead>
+      <tr>
+        <th>NISN</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>Jurusan</th>
+      </tr>
+    </thead>
+    <tbody id="siswa-body">
+      <!-- Data siswa ditambahkan lewat JS -->
+    </tbody>
+  </table>
+
+  <script src="../js/datasiswa.js"></script>
+</body>
+</html>

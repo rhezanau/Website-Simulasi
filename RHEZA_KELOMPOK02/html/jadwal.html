@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Jadwal Pelajaran</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+    }
+
+    .jadwal-box {
+      border: 2px solid #ccc;
+      padding: 20px;
+      display: inline-block;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px dashed #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .highlight {
+      color: orange;
+      font-weight: bold;
+    }
+
+    select {
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>9. Jadwal Pelajaran</h2>
+  <div class="jadwal-box">
+    <div><strong>| JADWAL PELAJARAN (Semua Role) |</strong></div>
+    <hr>
+    <div>Pilih Kelas:
+      <select id="kelas-select">
+        <option value="XI PPLG 1">XI PPLG 1</option>
+        <option value="XI DKV 2">XI DKV 2</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Hari</th>
+          <th>Jam</th>
+          <th>Mapel</th>
+          <th>Guru</th>
+        </tr>
+      </thead>
+      <tbody id="jadwal-body">
+        <!-- Baris jadwal akan ditampilkan di sini -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const dataJadwal = {
+      "XI PPLG 1": [
+        { hari: "Senin", jam: "08:00-09:40", mapel: "PBO", guru: "Rina" },
+        { hari: "Selasa", jam: "10:00-11:40", mapel: "Basis Data", guru: "Dedi" }
+      ],
+      "XI DKV 2": [
+        { hari: "Senin", jam: "08:00-09:40", mapel: "Desain Grafis", guru: "Ani" },
+        { hari: "Rabu", jam: "10:00-11:40", mapel: "Fotografi", guru: "Budi" }
+      ]
+    };
+
+    function tampilkanJadwal(kelas) {
+      const tbody = document.getElementById("jadwal-body");
+      tbody.innerHTML = "";
+
+      const jadwal = dataJadwal[kelas] || [];
+      jadwal.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.hari}</td>
+          <td class="highlight">${item.jam}</td>
+          <td>${item.mapel}</td>
+          <td>${item.guru}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById("kelas-select").addEventListener("change", function () {
+      tampilkanJadwal(this.value);
+    });
+
+    // Tampilkan default
+    window.onload = () => tampilkanJadwal(document.getElementById("kelas-select").value);
+  </script>
+
+</body>
+</html>
